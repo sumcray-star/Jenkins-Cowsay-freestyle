@@ -102,7 +102,7 @@ cat advice.message | cowsay -f $(ls /usr/share/cowsay/tux | shuf -n 1)
 
 Here is an example of the output displayed in the Jenkins console:
 
-![Jenkins ASCII Output](./Screenshot%202025-06-18%20155346.png)
+![Jenkins ASCII Output](./output.png)
 
 ---
 
