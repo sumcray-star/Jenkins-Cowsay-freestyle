@@ -1,0 +1,22 @@
+#!/bin/bash
+# Fetch advice
+curl -s https://api.adviceslip.com/advice > advice.json
+cat advice.json | jq -r '.slip.advice' > advice.message
+
+# Check if advice has more than 5 words
+if [ $(wc -w < advice.message) -gt 5 ]; then
+    echo "Advice has more than 5 words"
+else
+    echo "Advice - $(cat advice.message) has 5 words or less"
+fi
+
+# Export full PATH for cowsay
+export PATH="$PATH:/usr/games:/usr/local/games:/snap/bin"
+
+# Install cowsay if not installed
+if ! command -v cowsay &> /dev/null; then
+    sudo /usr/bin/apt-get install cowsay -y
+fi
+
+# Display the advice with a random cow
+cat advice.message | cowsay -f $(ls /usr/share/cowsay/tux | shuf -n 1)
